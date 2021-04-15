@@ -34,6 +34,7 @@ function generate() {
                 course.level = "level " + Math.floor(Math.random() * 7);
                 hour = available_hours[Math.floor(Math.random() * available_hours.length)];
                 course.hour = hour + 8;
+                course.day = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"][i];
                 if(available_hours.includes(hour + course.format - 1)) {
                     available_hours.splice(available_hours.indexOf(hour), 1);
                     if(course.format == 2) available_hours.splice(available_hours.indexOf(hour+1), 1);
