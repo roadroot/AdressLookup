@@ -5,3 +5,4 @@ function getScheduleByID(tid) {
     fs.readFile()
     return schedule;
 }
+getScheduleByID(0);
