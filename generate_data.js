@@ -4,8 +4,8 @@ function range(length) {
 
 function generate() {
     let json = {};
-    json.courses = [];
     json.teachers = [];
+    json.courses = [];
     let langs = ["french", "english", "german"];
     for(let i = 0; i < 32 + Math.random()*32; i++) {
         let teacher = {};
