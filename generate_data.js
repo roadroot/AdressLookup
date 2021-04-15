@@ -7,7 +7,7 @@ function generate() {
     json.courses = [];
     json.teachers = [];
     let langs = ["french", "english", "german"];
-    for(let i = 0; i < 32; i++) {
+    for(let i = 0; i < 32 + Math.random()*32; i++) {
         let teacher = {};
         teacher.id = i;
         teacher.name = "n"+i;
