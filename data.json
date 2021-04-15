@@ -25,7 +25,8 @@
             "format": 1,
             "teacher": 1,
             "level": 6,
-            "hour": 17
+            "hour": 17,
+            "day": "saturday"
         }
     ]
 }
