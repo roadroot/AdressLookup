@@ -26,15 +26,25 @@ function onQuery() {
   domResult = document.getElementById("result");
   domResult.innerHTML = '';
   if(!name) {
-    alert("Please fill at least Find field");
+    $("#predContainer")[0].className="col-md-4";
+    $("#succContainer")[0].className="col-md-4";
+    $("#resultContainer")[0].className="col-md-4";
+    setTimeout("alert('Please fill at least Find field');", 1);
     return;
   }
   new Promise(() => {
     result = fetch(name, postcode, limit, true, lon, lat, type, async = false).features;
     console.log(result)
     console.log(result)
-    if(result.length == 0)
-      alert('0 addresses found');
+    if(result.length == 0) {
+      $("#predContainer")[0].className="col-md-4";
+      $("#succContainer")[0].className="col-md-4";
+      $("#resultContainer")[0].className="col-md-4";
+      setTimeout("alert('0 addresses found');", 1);
+    }
+    $("#predContainer")[0].className="col-md-1";
+    $("#succContainer")[0].className="col-md-1";
+    $("#resultContainer")[0].className="col-md-6";
     table = generateDataTable(result); /*document.createElement("table");*/
     domResult.appendChild(table);
     $("#dataTable").dataTable({limit: 10});
