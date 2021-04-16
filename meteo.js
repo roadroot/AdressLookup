@@ -36,7 +36,8 @@ function onQuery() {
     if(result.length == 0)
       alert('0 addresses found');
     table = generateDataTable(result); /*document.createElement("table");*/
-    domResult.appendChild(table)
+    domResult.appendChild(table);
+    $("#dataTable").dataTable({limit: 10});
 
     /*table.appendChild(createCouple("Properties", "Values"))
     table.appendChild(createCouple("name :", `${result[res].properties.name}`))
@@ -72,13 +73,16 @@ function generateDataTable(result) {
   let dataTable = document.createElement("table");
   dataTable.className="table table-striped table-bordered";
   dataTable.style = "width:100%";
+  dataTable.id = "dataTable";
   let thead = document.createElement("thead");
   dataTable.appendChild(thead);
   let props = ["name", "Postcode", "Context", "Type", "Geometry"];
+  let tr = document.createElement("tr");
+  thead.appendChild(tr);
   for(let prop of props) {
     let th = document.createElement("th");
     th.innerHTML = prop;
-    thead.appendChild(th);
+    tr.appendChild(th);
   }
   let tbody = document.createElement("tbody");
   dataTable.appendChild(tbody);
