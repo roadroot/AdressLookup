@@ -1,8 +1,8 @@
-var fs = require("fs");
+import { readFileSync } from "fs";
 
 function getScheduleByID(tid, path = "file.json") {
     schedule = {};
-    let data = fs.readFileSync(path);
+    let data = readFileSync(path);
     let json = JSON.parse(data)
     for (let course of json.courses) {
         if (course.teacher == tid) {
