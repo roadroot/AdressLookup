@@ -29,7 +29,7 @@ function onQuery() {
     $("#predContainer")[0].className="col-md-4";
     $("#succContainer")[0].className="col-md-4";
     $("#resultContainer")[0].className="col-md-4";
-    setTimeout("alert('Please fill at least Find field');", 1);
+    setTimeout("alert('Please fill at least Find field');", 20);
     return;
   }
   new Promise(() => {
@@ -40,22 +40,14 @@ function onQuery() {
       $("#predContainer")[0].className="col-md-4";
       $("#succContainer")[0].className="col-md-4";
       $("#resultContainer")[0].className="col-md-4";
-      setTimeout("alert('0 addresses found');", 1);
+      setTimeout("alert('0 addresses found');", 20);
     }
     $("#predContainer")[0].className="col-md-1";
     $("#succContainer")[0].className="col-md-1";
     $("#resultContainer")[0].className="col-md-6";
-    table = generateDataTable(result); /*document.createElement("table");*/
+    table = generateDataTable(result);
     domResult.appendChild(table);
     $("#dataTable").dataTable({limit: 10});
-
-    /*table.appendChild(createCouple("Properties", "Values"))
-    table.appendChild(createCouple("name :", `${result[res].properties.name}`))
-    table.appendChild(createCouple("Postcode :", `${result[res].properties.postcode}`))
-    table.appendChild(createCouple("Context :", `${result[res].properties.context}`))
-    table.appendChild(createCouple("Type : ", `${result[res].properties.type}`))
-    table.appendChild(createCouple("Geometry", `${result[res].geometry.coordinates[1]}, ${result[res].geometry.coordinates[0]}`))
-    document.getElementById("navigation").style.display = 'block'*/
   });
 }
 
@@ -73,11 +65,6 @@ function createCouple(name, value) {
   tr.appendChild(val);
   return tr;
 }
-/*********************************************************** */
-var res = 0;
-var table = document.createElement("table");
-var result;
-
 
 function generateDataTable(result) {
   let dataTable = document.createElement("table");
@@ -106,41 +93,4 @@ function generateDataTable(result) {
     }
   }
   return dataTable;
-}
-
-function nextPage() {
-  res++;
-  if(res > result.length - 1 ){
-    res--;
-    alert("Derniere page !");
-  }else{
-    table.innerHTML = '';
-    affichageTableau(res);
-  }
-}
-
-function previousPage() {
-  if(res > 0){
-    res--;
-    table.innerHTML = '';
-    affichageTableau(res);
-  }else{
-    alert("1ere valeur affichée")
-  }
-}
-
-function affichageTableau(res){
-  table.appendChild(createCouple("Properties", "Values"))
-  table.appendChild(createCouple("Geometry", `${result[res].geometry.coordinates[1]},${result[res].geometry.coordinates[0]}`))
-  table.appendChild(createCouple("City Code :", `${result[res].properties.citycode}`))
-  table.appendChild(createCouple("Context :", `${result[res].properties.context}`))
-  table.appendChild(createCouple("id : ",  `${result[res].properties.id}`))
-  table.appendChild(createCouple("Importance :", `${result[res].properties.importance}`))
-  table.appendChild(createCouple("label :", `${result[res].properties.label}`))
-  table.appendChild(createCouple("Name : ", `${result[res].properties.name}`))
-  table.appendChild(createCouple("Postcode :", `${result[res].properties.postcode}`))
-  table.appendChild(createCouple("Score :", `${result[res].properties.score}`))
-  table.appendChild(createCouple("Type : ", `${result[res].properties.type}`))
-  table.appendChild(createCouple("X :", `${result[res].properties.x}`))
-  table.appendChild(createCouple("Y :", `${result[res].properties.y}`))
 }
