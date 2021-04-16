@@ -30,15 +30,15 @@ function generate() {
                 let course = {}
                 course.id = cid++;
                 course.teacher = teacher.id;
-                course.format = number_of_hours==1?1:Math.floor(Math.random() * 2 + 1);
+                course.duration = number_of_hours==1?1:Math.floor(Math.random() * 2 + 1);
                 course.level = "level " + Math.floor(Math.random() * 7);
                 hour = available_hours[Math.floor(Math.random() * available_hours.length)];
                 course.hour = hour + 8;
                 course.day = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"][i];
-                if(available_hours.includes(hour + course.format - 1)) {
+                if(available_hours.includes(hour + course.duration - 1)) {
                     available_hours.splice(available_hours.indexOf(hour), 1);
-                    if(course.format == 2) available_hours.splice(available_hours.indexOf(hour+1), 1);
-                    number_of_hours -= course.format;
+                    if(course.duration == 2) available_hours.splice(available_hours.indexOf(hour+1), 1);
+                    number_of_hours -= course.duration;
                     json.courses.push(course);
                 } else {
                     cid--;
@@ -50,7 +50,7 @@ function generate() {
         let course = {}
         course.id = cid++;
         course.teacher = teacher.id;
-        course.format = Math.floor(Math.random() * 2 + 1);
+        course.duration = Math.floor(Math.random() * 2 + 1);
         course.level = "level " + Math.floor(Math.random() * 7);
         course.hour = Math.floor(Math.random() * 12 + 8);
     }
