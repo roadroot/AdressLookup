@@ -1,14 +1,22 @@
 const fs = require("fs");
 
-function getScheduleByID({tid, startHourRange: shr = 8, endHourRangeIncluded: ehr = 19, startDayRange = "monday", endDayRangeIncluded = "sunday", path = "file.json"}) {
+function getScheduleByID({tid, startHourRange: shr = 8, endHourRangeIncluded: ehr = 19, startDayRange, endDayRangeIncluded, path = "file.json"}) {
+    let week = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+    let schedule = {};
+    if(startDayRange == null && endDayRangeIncluded == null) {
+        for(let day of week) {
+            let sch = getScheduleByID({tid: tid, startHourRange: shr, endHourRangeIncluded: ehr, startDayRange: day, endDayRangeIncluded: day, path: path});
+            if(sch[day])
+                schedule[day] = sch[day]
+        }
+        return schedule
+    }
     if(shr == null) shr = 8;
     if(ehr == null) ehr = 19;
     if(startDayRange == null) startDayRange = "monday";
     if(endDayRangeIncluded == null) endDayRangeIncluded = "sunday";
-    schedule = {};
     let data = fs.readFileSync(path);
     let json = JSON.parse(data);
-    let week = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
     for (let course of json.courses) {
         let day = week.indexOf(course.day);
         let sdr = week.indexOf(startDayRange);
@@ -21,4 +29,4 @@ function getScheduleByID({tid, startHourRange: shr = 8, endHourRangeIncluded: eh
     }
     return schedule;
 }
-console.log(getScheduleByID({tid: 1, startHourRange: 12, endHourRangeIncluded: 13, startDayRange: "saturday", endDayRangeIncluded: "saturday"}));
+console.log(getScheduleByID({tid: 2, endHourRangeIncluded: 12}));
